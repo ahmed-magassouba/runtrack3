@@ -1,10 +1,25 @@
 function tri(numbers, order) {
-  numbers = numbers[""];
-  if (order == "asc" || order == "desc") {
-    if (order == "asc") {
-    } else if (order == "desc") {
+
+
+
+  for (var i = 0; i <= numbers.length; i++) {
+    for (var j = i + 1; j <= numbers.length; j++) {
+      if (numbers[i] > numbers[j]) {
+        var tampon = numbers[i]
+        numbers[i] = numbers[j]
+        numbers[j] = tampon
+      }
     }
-  } else {
-    console.log("cette zone ne doit comprendre que asc ou desc");
+
   }
+  if (order == "asc") {
+    console.log(numbers)
+  } else if (order == "desc") {
+    numbers.reverse()
+    console.log(numbers)
+  }
+
 }
+
+
+tri([5, 7, 9, 10, 4, 8], "desc")
