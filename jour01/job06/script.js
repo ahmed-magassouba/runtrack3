@@ -1,22 +1,16 @@
 function fizzbuzz() {
-
- let nbre=151
-  for(let i =1; i<=nbre;i++){
-
-    if(i % 3 == 0 && i % 5 == 0){
+  let nbre = 151;
+  for (let i = 1; i <= nbre; i++) {
+    if (i % 3 == 0 && i % 5 == 0) {
       console.log("FizzBuzz");
-    }else if (i % 3 == 0){
+    } else if (i % 3 == 0) {
       console.log("Fizz");
-    }else if(i % 5 == 0){
+    } else if (i % 5 == 0) {
       console.log("Buzz");
-    }else{
+    } else {
       console.log(i);
     }
-
-
   }
-
 }
 
-fizzbuzz()
-
+fizzbuzz();
