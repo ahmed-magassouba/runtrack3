@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   let input = document.querySelectorAll("input");
   let p = document.querySelectorAll("p");
-  let regexNumber = /[0-9]{1,}/
+
+
+  let regexUpperCase= /[a-z]{1,}/;
+  let regexLowerCase= /[A-Z]{1,}/;
+  let regexNumber = /[0-9]{1,}/;
 
   input[0].addEventListener("keyup", function () {
     console.log(this.value);
