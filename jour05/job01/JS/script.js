@@ -1,28 +1,38 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   let erreur;
-  let p = document.getElementById('erreur');
+  let p = document.getElementById("erreur");
   let formInscription = document.forms["inscription"];
-  console.log(formInscription.valider);
-
-  // formInscription.addEventListener("submit", function () {
-  //   fetch('traitement.php', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-type': 'application/json'
-  //     },
-  //     // body: JSON.stringify(formInscription.email)
-
-  //   })
-  //     .then((response) => response.json())
-  //     .then((donnees) => {
-  //       console.log(donnees);
-  //     })
-  // })
+  let input2 = document.getElementById("input2")
+  console.log(input2)
+  console.log(formInscription)
+  input2.addEventListener("click", function () {
+    
+    let formData = new FormData(formInscription);
+    fetch("traitement.php", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: formData
+    })
+      .then((response) => console.log(response.status))
+      .then((response) => {
+         var err = document.createElement('p')
+         err.innerHTML= response
+         document.body.append(err)
+        
+         if(response ==='200')
+         {
+             console.log('ok')
+         }
+         else{ console.log('pas ok')}
+      });
+  });
 
   // ***********************************VALIDATION DU NOM***************************
   formInscription.nom.addEventListener("input", function () {
     validNom(this);
-  })
+  });
   const validNom = function (champ) {
     let message;
     let valide = false;
@@ -42,24 +52,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (valide) {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
-      p.classList.remove('error');
-      p.classList.add('valid');
+      p.classList.remove("error");
+      p.classList.add("valid");
       return true;
     } else {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
-      return false
+      p.classList.remove("valid");
+      p.classList.add("error");
+      return false;
     }
-
-  }
-
+  };
 
   // ***********************************VALIDATION DU PRENOM***************************
   formInscription.prenom.addEventListener("input", function () {
     validPrenom(this);
-  })
+  });
   const validPrenom = function (champ) {
     let message;
     let valide = false;
@@ -70,8 +78,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       message = "Le Prénom ne doit pas contenir de chiffre";
     } else if (!/^[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ-\s]+$/.test(champ.value)) {
       message = "Le prenom contient des carractère non autorisé";
-    }
-    else {
+    } else {
       message = " Prénom valide";
       valide = true;
     }
@@ -79,52 +86,52 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (valide) {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
-      p.classList.remove('error');
-      p.classList.add('valid');
+      p.classList.remove("error");
+      p.classList.add("valid");
       return true;
     } else {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
-      return false
+      p.classList.remove("valid");
+      p.classList.add("error");
+      return false;
     }
-
-  }
-
+  };
 
   // ***********************************VALIDATION EMAIL***************************
   formInscription.email.addEventListener("input", function () {
     validEmail(this);
-  })
+  });
   const validEmail = function (champ) {
-    let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$", 'g');
+    let emailRegExp = new RegExp(
+      "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
+      "g"
+    );
     let testEmail = emailRegExp.test(champ.value);
     if (testEmail) {
       p.innerHTML = "Adresse email valide";
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
-      p.classList.remove('error');
-      p.classList.add('valid');
+      p.classList.remove("error");
+      p.classList.add("valid");
       return true;
     } else {
       p.innerHTML = "Adresse email invalide";
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
+      p.classList.remove("valid");
+      p.classList.add("error");
       return false;
     }
-  }
-
+  };
 
   // ***********************************CONFIRMATION EMAIL***************************
   formInscription.confirmemail.addEventListener("input", function () {
     validConfirmEmail(this);
-  })
+  });
   const validConfirmEmail = function (champ) {
     if (champ.value != formInscription.email.value && champ.value != " ") {
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
+      p.classList.remove("valid");
+      p.classList.add("error");
       p.innerHTML = "Les deux email ne correspondent pas";
       return false;
     } else {
@@ -132,12 +139,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
       return true;
     }
-  }
+  };
 
   // ***********************************VALIDATION MOT DE PASSE***************************
   formInscription.password.addEventListener("input", function () {
     validPassword(this);
-  })
+  });
   const validPassword = function (champ) {
     let message;
     let valide = false;
@@ -151,67 +158,68 @@ document.addEventListener("DOMContentLoaded", (event) => {
       message = "Le mot de passe doit contenir au moins 1 lettre minuscule";
     } else if (!/[0-9]/.test(champ.value)) {
       message = "Le mot de passe doit contenir au moins 1 chiffre";
-    }
-    else if (!/[*$@!#%]/.test(champ.value)) {
-      message = "Le mot de passe doit contenir l'un de ces carratères (* $ @ ! # %)";
+    } else if (!/[*$@!#%]/.test(champ.value)) {
+      message =
+        "Le mot de passe doit contenir l'un de ces carratères (* $ @ ! # %)";
     } else {
       message = " Mot de passe valide";
       valide = true;
     }
 
-
     if (valide) {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
-      p.classList.remove('error');
-      p.classList.add('valid');
+      p.classList.remove("error");
+      p.classList.add("valid");
       return true;
     } else {
       p.innerHTML = message;
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
-      return false
+      p.classList.remove("valid");
+      p.classList.add("error");
+      return false;
     }
-
-  }
-
+  };
 
   // **************VALIDATION DE CONFIRMATION DE MOT DE PASSE***************************
   formInscription.confirm.addEventListener("input", function () {
     validConfirm(this);
-  })
+  });
   const validConfirm = function (champ) {
-
     if (champ.value != formInscription.password.value) {
       p.innerHTML = "Les deux mot de passe ne correspondent pas";
       champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
-      p.classList.remove('valid');
-      p.classList.add('error');
+      p.classList.remove("valid");
+      p.classList.add("error");
       return false;
     } else {
       p.innerHTML = "";
       champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
       return true;
     }
-  }
+  };
 
   // ***********************************TRAITEMENT SUR LE FROMULAIRE***************************
-  formInscription.addEventListener("click", function (e) {
-    e.preventDefault();
+//   formInscription.addEventListener("click", function (e) {
+//     e.preventDefault();
 
-    if (validNom(formInscription.nom) && validPrenom(formInscription.prenom) && validEmail(formInscription.email) && validConfirmEmail(formInscription.confirmemail) && validPassword(formInscription.password) && validConfirm(formInscription.confirm)) {
-      formInscription.submit();
-      console.log('reussi');
-    } else {
-      console.log('problème');
-      p.innerHTML = "Le formulaire d'inscription est incomplet";
-      p.classList.remove('valid');
-      p.classList.add('error');
-    }
-
-  })
-
+//     if (
+//       validNom(formInscription.nom) &&
+//       validPrenom(formInscription.prenom) &&
+//       validEmail(formInscription.email) &&
+//       validConfirmEmail(formInscription.confirmemail) &&
+//       validPassword(formInscription.password) &&
+//       validConfirm(formInscription.confirm)
+//     ) {
+//       formInscription.submit();
+//       console.log("reussi");
+//     } else {
+//       console.log("problème");
+//       p.innerHTML = "Le formulaire d'inscription est incomplet";
+//       p.classList.remove("valid");
+//       p.classList.add("error");
+//     }
+//   });
 
   // input[0].addEventListener("keyup", function () {
   //   console.log(this.value);

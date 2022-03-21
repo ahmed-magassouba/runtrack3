@@ -1,9 +1,7 @@
 <?php
 require_once '../Model/UserModel.php';
 
-if (isset($_POST['submit'])) {
-
-    if (isset($_POST['email'], $_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+    if (!empty($_POST) && isset($_POST['email'], $_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])) {
         
         $email = strip_tags(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = strip_tags($_POST['password']);
@@ -27,4 +25,4 @@ if (isset($_POST['submit'])) {
             $_SESSION['erreur'] = 'Mot de passe ou email incorrect';
         }
     }
-}
+

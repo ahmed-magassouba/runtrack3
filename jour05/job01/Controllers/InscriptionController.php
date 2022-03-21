@@ -13,7 +13,7 @@ if (isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], 
 
     $utilisateur = new UserModel();
     $exist = $utilisateur->findByEmail($email);
-
+    echo($exist);
     if (!$exist) {
 
         if ($password == $confirm) {

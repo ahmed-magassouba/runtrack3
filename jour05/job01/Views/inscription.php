@@ -1,9 +1,8 @@
-<?php require_once '../Controllers/InscriptionController.php';
-require_once 'header.php'  ?>
+<?php require_once 'header.php'  ?>
 <section>
     <h1>Formulaire d'inscription</h1>
     <p id="erreur">(*) Champ obligatoite</p>
-    <form action="traitement.php" method="post" id="inscription">
+    <form action="" method="post" id="inscription">
         <div class="input">
             <label for="nom">*Nom : </label>
             <input type="text" name="nom" id="nom" placeholder="Votre nom" required>
@@ -29,7 +28,7 @@ require_once 'header.php'  ?>
             <input type="password" name="confirm" id="confirm" placeholder="Confirmer le mot de passe" required>
         </div>
         
-            <input class="input2" type="submit" name="valider" value="Inscription">
+            <input id="input2" type="button" name="valider" value="Inscription">
        
     </form>
 
