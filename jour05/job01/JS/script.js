@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   input2.addEventListener("click", function () {
     
     let formData = new FormData(formInscription);
-    fetch("traitement.php", {
+    fetch("inscriptionController.php", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
