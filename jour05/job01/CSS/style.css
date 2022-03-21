@@ -27,6 +27,7 @@ h1{
    display: flex;
    justify-content: center;
    align-items: center;
+   text-shadow: 1px 1px 2px black ;
    
     
 }
@@ -61,14 +62,16 @@ input::placeholder{
   font-weight: bold;
 }
 .input2{
-    font-size: 40px;
+  
     background-color:gray;
     margin-bottom: 20px; 
      height: 60px;
      color:white;
-     font-size: bolder;
      width:70%;
      cursor: pointer;
+     text-shadow: 1px 1px 2px black ;
+     color: white;
+     font: 2.5em Georgia, serif;
 }
 label{
     font-weight: 800;
