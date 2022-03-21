@@ -1,49 +1,243 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  let input = document.querySelectorAll("input");
-  let p = document.querySelectorAll("p");
+  let erreur;
+  let p = document.getElementById('erreur');
+  let formInscription = document.forms["inscription"];
+  console.log(formInscription.valider);
 
+  // formInscription.addEventListener("submit", function () {
+  //   fetch('traitement.php', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json'
+  //     },
+  //     // body: JSON.stringify(formInscription.email)
 
-  let regexUpperCase= /[a-z]{1,}/;
-  let regexLowerCase= /[A-Z]{1,}/;
-  let regexNumber = /[0-9]{1,}/;
+  //   })
+  //     .then((response) => response.json())
+  //     .then((donnees) => {
+  //       console.log(donnees);
+  //     })
+  // })
 
-  input[0].addEventListener("keyup", function () {
-    console.log(this.value);
-    if (this.value.length === 0) {
-      champVide(input[0], p[0], "le champ nom est vide");
-    } else if (this.value.length <= 1) {
-      p[0].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
-      p[0].style.color = "red";
-      input[0].style.color = "red";
-      input[0].style.borderColor = "red";
+  // ***********************************VALIDATION DU NOM***************************
+  formInscription.nom.addEventListener("input", function () {
+    validNom(this);
+  })
+  const validNom = function (champ) {
+    let message;
+    let valide = false;
+    // let p = champ.nextElementSibling;
+    //Mot de passe supérieur à 8 carractère
+    if (champ.value.length <= 1) {
+      message = "Le nom doit contenir au moins 2 carractères";
+    } else if (/[0-9]/.test(champ.value)) {
+      message = "Le nom ne doit pas contenir de chiffre";
+    } else if (!/^[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ-\s]+$/.test(champ.value)) {
+      message = "Le nom contient des carractère non autorisé";
     } else {
-      ok(input[0], p[0], "le champ nom est vide");
+      message = " Nom valide";
+      valide = true;
     }
-  });
 
-  input[1].addEventListener("keyup", function () {
-    console.log(this.value);
-    if (this.value.length === 0) {
-      champVide(input[1], p[1], "le champ nom est vide");
-    } else if (this.value.length <= 3) {
-      p[1].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
-      p[1].style.color = "red";
-      input[1].style.color = "red";
-      input[1].style.borderColor = "red";
+    if (valide) {
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      p.classList.remove('error');
+      p.classList.add('valid');
+      return true;
     } else {
-      ok(input[1], p[1], "le champ prénom est vide");
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      return false
     }
-  });
 
-  function champVide(champ, paragraphe, message) {
-    paragraphe.innerHTML = message;
-    paragraphe.style.color = "red";
-    champ.style.borderColor = "red";
   }
 
-  function ok(champ, paragraphe) {
-    paragraphe.innerHTML = "";
-    champ.style.borderColor = "green";
-    champ.style.color = "green";
+
+  // ***********************************VALIDATION DU PRENOM***************************
+  formInscription.prenom.addEventListener("input", function () {
+    validPrenom(this);
+  })
+  const validPrenom = function (champ) {
+    let message;
+    let valide = false;
+    //Mot de passe supérieur à 8 carractère
+    if (champ.value.length < 3) {
+      message = "Le prénom doit contenir au moins 3 carractères";
+    } else if (/[0-9]/.test(champ.value)) {
+      message = "Le Prénom ne doit pas contenir de chiffre";
+    } else if (!/^[a-zA-Z'àâéèêôùûçÀÂÉÈÔÙÛÇ-\s]+$/.test(champ.value)) {
+      message = "Le prenom contient des carractère non autorisé";
+    }
+    else {
+      message = " Prénom valide";
+      valide = true;
+    }
+
+    if (valide) {
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      p.classList.remove('error');
+      p.classList.add('valid');
+      return true;
+    } else {
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      return false
+    }
+
   }
+
+
+  // ***********************************VALIDATION EMAIL***************************
+  formInscription.email.addEventListener("input", function () {
+    validEmail(this);
+  })
+  const validEmail = function (champ) {
+    let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$", 'g');
+    let testEmail = emailRegExp.test(champ.value);
+    if (testEmail) {
+      p.innerHTML = "Adresse email valide";
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      p.classList.remove('error');
+      p.classList.add('valid');
+      return true;
+    } else {
+      p.innerHTML = "Adresse email invalide";
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      return false;
+    }
+  }
+
+
+  // ***********************************CONFIRMATION EMAIL***************************
+  formInscription.confirmemail.addEventListener("input", function () {
+    validConfirmEmail(this);
+  })
+  const validConfirmEmail = function (champ) {
+    if (champ.value != formInscription.email.value && champ.value != " ") {
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      p.innerHTML = "Les deux email ne correspondent pas";
+      return false;
+    } else {
+      p.innerHTML = "";
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      return true;
+    }
+  }
+
+  // ***********************************VALIDATION MOT DE PASSE***************************
+  formInscription.password.addEventListener("input", function () {
+    validPassword(this);
+  })
+  const validPassword = function (champ) {
+    let message;
+    let valide = false;
+    //Mot de passe supérieur à 8 carractère
+    if (champ.value.length < 8) {
+      message = "Le mot de passe doit contenir au moins 8 carractères";
+      //Au moins 1 majuscule
+    } else if (!/[A-Z]/.test(champ.value)) {
+      message = "Le mot de passe doit contenir au moins 1 lettre majuscule";
+    } else if (!/[a-z]/.test(champ.value)) {
+      message = "Le mot de passe doit contenir au moins 1 lettre minuscule";
+    } else if (!/[0-9]/.test(champ.value)) {
+      message = "Le mot de passe doit contenir au moins 1 chiffre";
+    }
+    else if (!/[*$@!#%]/.test(champ.value)) {
+      message = "Le mot de passe doit contenir l'un de ces carratères (* $ @ ! # %)";
+    } else {
+      message = " Mot de passe valide";
+      valide = true;
+    }
+
+
+    if (valide) {
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      p.classList.remove('error');
+      p.classList.add('valid');
+      return true;
+    } else {
+      p.innerHTML = message;
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      return false
+    }
+
+  }
+
+
+  // **************VALIDATION DE CONFIRMATION DE MOT DE PASSE***************************
+  formInscription.confirm.addEventListener("input", function () {
+    validConfirm(this);
+  })
+  const validConfirm = function (champ) {
+
+    if (champ.value != formInscription.password.value) {
+      p.innerHTML = "Les deux mot de passe ne correspondent pas";
+      champ.style.backgroundColor = "rgba(126, 1, 1, 0.151)";
+      p.classList.remove('valid');
+      p.classList.add('error');
+      return false;
+    } else {
+      p.innerHTML = "";
+      champ.style.backgroundColor = "rgba(1, 126, 1, 0.151)";
+      return true;
+    }
+  }
+
+  // ***********************************TRAITEMENT SUR LE FROMULAIRE***************************
+  formInscription.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (validNom(formInscription.nom) && validPrenom(formInscription.prenom) && validEmail(formInscription.email) && validConfirmEmail(formInscription.confirmemail) && validPassword(formInscription.password) && validConfirm(formInscription.confirm)) {
+      formInscription.submit();
+      console.log('reussi');
+    } else {
+      console.log('problème');
+      p.innerHTML = "Le formulaire d'inscription est incomplet";
+      p.classList.remove('valid');
+      p.classList.add('error');
+    }
+
+  })
+
+
+  // input[0].addEventListener("keyup", function () {
+  //   console.log(this.value);
+  //   if (this.value.length === 0) {
+  //     champVide(input[0], p[0], "le champ nom est vide");
+  //   } else if (this.value.length <= 1) {
+  //     p[0].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
+  //     p[0].style.color = "red";
+  //     input[0].style.color = "red";
+  //     input[0].style.borderColor = "red";
+  //   } else {
+  //     ok(input[0], p[0], "le champ nom est vide");
+  //   }
+  // });
+
+  // input[1].addEventListener("keyup", function () {
+  //   console.log(this.value);
+  //   if (this.value.length === 0) {
+  //     champVide(input[1], p[1], "le champ nom est vide");
+  //   } else if (this.value.length <= 3) {
+  //     p[1].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
+  //     p[1].style.color = "red";
+  //     input[1].style.color = "red";
+  //     input[1].style.borderColor = "red";
+  //   } else {
+  //     ok(input[1], p[1], "le champ prénom est vide");
+  //   }
+  // });
 });
