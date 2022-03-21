@@ -5,23 +5,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let input2 = document.getElementById("input2")
   console.log(input2)
   console.log(formInscription)
+
+  
   input2.addEventListener("click", function () {
     
     let formData = new FormData(formInscription);
-    fetch("inscriptionController.php", {
+    fetch("../Controllers/InscriptionController.php", {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
       body: formData
     })
-      .then((response) => console.log(response.status))
+      .then((response) => response.text())
       .then((response) => {
          var err = document.createElement('p')
          err.innerHTML= response
          document.body.append(err)
-        
-         if(response ==='200')
+         console.log(response.status)
+         if(response=='200')
          {
              console.log('ok')
          }

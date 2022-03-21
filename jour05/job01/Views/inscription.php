@@ -21,11 +21,11 @@
         </div>
         <div class="input">
             <label for="password">*Mot de passe : </label>
-            <input type="password" name="password" id="password" placeholder="Votre mot de passe" required>
+            <input type="password" name="password" id="password" placeholder="Votre mot de passe" required value="Magass22*">
         </div>
         <div class="input">
             <label for="confirm">*Confirmer le mot de passe : </label>
-            <input type="password" name="confirm" id="confirm" placeholder="Confirmer le mot de passe" required>
+            <input type="password" name="confirm" id="confirm" placeholder="Confirmer le mot de passe" required value="Magass22*">
         </div>
         
             <input id="input2" type="button" name="valider" value="Inscription">

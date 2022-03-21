@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+ 
+}
+
+
+nav{
+  background-color: rgba(0, 0, 0, 0.603);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+label{
+  color: white;
+  font-size: 1.5rem;
+  line-height: 70px;
+  border: 1px solid white;
+  display: flex;
+  border-radius:15px;
+  padding:4px;
+  background-color:white;
+  cursor: pointer;
+}
+
+nav input, ul, .dropdown{
+  display: none;
+}
+
+#btn:checked + ul{
+  display: block;
+}
+
+ul{
+  background-color: black;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+}
+
+li a{
+  color: white;
+  text-decoration: none;
+  line-height: 70px;
+  font-size: 1.2rem;
+}
+
+
+
+@media all and (min-width: 768px){
+  label{
+      display: none;
+  }
+
+  ul{
+      display: initial;
+      position: static;
+  }
+
+  li{
+      display: inline-block;
+      margin-left: 20px;
+      position: relative;
+  }
+
+
+  
+
+}
+
+

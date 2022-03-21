@@ -7,5 +7,5 @@ if(isset($_POST))
     $result = '200';
     echo $result;
 }
-
+var_dump($_POST);
 ?>
