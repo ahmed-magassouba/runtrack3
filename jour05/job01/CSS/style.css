@@ -24,7 +24,9 @@ h1{
     color:white;
     height:50px;
     width:100%;
-   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    
     
 }
@@ -58,9 +60,20 @@ input::placeholder{
   font-size: 20px;
   font-weight: bold;
 }
+.input2{
+    font-size: 40px;
+    background-color:gray;
+    margin-bottom: 20px; 
+     height: 60px;
+     color:white;
+     font-size: bolder;
+     width:70%;
+     cursor: pointer;
+}
 label{
     font-weight: 800;
     text-shadow: 2;
+  
     
 }
 

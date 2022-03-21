@@ -28,9 +28,9 @@ require_once 'header.php'  ?>
             <label for="confirm">*Confirmer le mot de passe : </label>
             <input type="password" name="confirm" id="confirm" placeholder="Confirmer le mot de passe" required>
         </div>
-        <div>
-            <input type="submit" name="valider" value="Inscription">
-        </div>
+        
+            <input class="input2" type="submit" name="valider" value="Inscription">
+       
     </form>
 
 </section>
