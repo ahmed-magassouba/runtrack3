@@ -6,28 +6,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
   console.log(input2)
   console.log(formInscription)
 
-  
+
   input2.addEventListener("click", function () {
-    
+
     let formData = new FormData(formInscription);
     fetch("../Controllers/InscriptionController.php", {
       method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
       body: formData
     })
       .then((response) => response.text())
       .then((response) => {
-         var err = document.createElement('p')
-         err.innerHTML= response
-         document.body.append(err)
-         console.log(response.status)
-         if(response=='200')
-         {
-             console.log('ok')
-         }
-         else{ console.log('pas ok')}
+        var err = document.createElement('p')
+        err.innerHTML = response
+        document.body.append(err)
+        console.log(response)
+
       });
   });
 
@@ -202,52 +198,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
   };
 
   // ***********************************TRAITEMENT SUR LE FROMULAIRE***************************
-//   formInscription.addEventListener("click", function (e) {
-//     e.preventDefault();
+  //   formInscription.addEventListener("click", function (e) {
+  //     e.preventDefault();
 
-//     if (
-//       validNom(formInscription.nom) &&
-//       validPrenom(formInscription.prenom) &&
-//       validEmail(formInscription.email) &&
-//       validConfirmEmail(formInscription.confirmemail) &&
-//       validPassword(formInscription.password) &&
-//       validConfirm(formInscription.confirm)
-//     ) {
-//       formInscription.submit();
-//       console.log("reussi");
-//     } else {
-//       console.log("problème");
-//       p.innerHTML = "Le formulaire d'inscription est incomplet";
-//       p.classList.remove("valid");
-//       p.classList.add("error");
-//     }
-//   });
+  //     if (
+  //       validNom(formInscription.nom) &&
+  //       validPrenom(formInscription.prenom) &&
+  //       validEmail(formInscription.email) &&
+  //       validConfirmEmail(formInscription.confirmemail) &&
+  //       validPassword(formInscription.password) &&
+  //       validConfirm(formInscription.confirm)
+  //     ) {
+  //       formInscription.submit();
+  //       console.log("reussi");
+  //     } else {
+  //       console.log("problème");
+  //       p.innerHTML = "Le formulaire d'inscription est incomplet";
+  //       p.classList.remove("valid");
+  //       p.classList.add("error");
+  //     }
+  //   });
 
-  // input[0].addEventListener("keyup", function () {
-  //   console.log(this.value);
-  //   if (this.value.length === 0) {
-  //     champVide(input[0], p[0], "le champ nom est vide");
-  //   } else if (this.value.length <= 1) {
-  //     p[0].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
-  //     p[0].style.color = "red";
-  //     input[0].style.color = "red";
-  //     input[0].style.borderColor = "red";
-  //   } else {
-  //     ok(input[0], p[0], "le champ nom est vide");
-  //   }
-  // });
 
-  // input[1].addEventListener("keyup", function () {
-  //   console.log(this.value);
-  //   if (this.value.length === 0) {
-  //     champVide(input[1], p[1], "le champ nom est vide");
-  //   } else if (this.value.length <= 3) {
-  //     p[1].innerHTML = "Le champ nom doit contenir plus de 3 lettres";
-  //     p[1].style.color = "red";
-  //     input[1].style.color = "red";
-  //     input[1].style.borderColor = "red";
-  //   } else {
-  //     ok(input[1], p[1], "le champ prénom est vide");
-  //   }
-  // });
 });

@@ -27,9 +27,9 @@
             <label for="confirm">*Confirmer le mot de passe : </label>
             <input type="password" name="confirm" id="confirm" placeholder="Confirmer le mot de passe" required value="Magass22*">
         </div>
-        
-            <input id="input2" type="button" name="valider" value="Inscription">
-       
+
+        <input class="input2" id="input2" type="button" name="valider" value="Inscription">
+
     </form>
 
 </section>
