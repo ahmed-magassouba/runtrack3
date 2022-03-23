@@ -19,6 +19,7 @@ function sommenombrespremiers(nbre1, nbre2) {
       }
     }
 
+    
     if (value1 == true && value2 == true) {
       console.log(nbre1 + nbre2);
     }
